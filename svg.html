@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body {
+            font-family: "Source Sans Pro","Open Sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans","Tahoma",sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 95%;
+        }
+        body.width600 {
+            font-size: 16px;
+        }
+        tt, code, kbd, samp, pre {
+            font-family: "Source Code Pro",monospace,serif,"Segoe UI Symbol","Symbol";
+            font-size: 12px;
+            font-size-adjust: none;
+        }
+        .width600 tt, .width600 code, .width600 kbd, .width600 samp, .width600 pre {
+            font-size: 14px;
+        }
+        nav {
+            font-size: 14px;
+        }
+        header, h2 {
+            font-feature-settings: "kern";
+            font-kerning: normal;
+            text-rendering: optimizelegibility;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h1 .subheading {
+            font-size: 14px;
+            letter-spacing: normal;
+        }
+        .width600 h1 {
+            font-size: 32px;
+        }
+        .width600 h1 .subheading {
+            font-size: 16px;
+        }
+        sup, sub {
+            font-size: 75%;
+            line-height: 0;
+            padding-left: 2px;
+            position: relative;
+            vertical-align: baseline;
+        }
+        sup {
+            top: -0.5em;
+        }
+        sub {
+            bottom: -0.25em;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #fff;
+            color: #333;
+        }
+        .main {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1075px;
+            padding: 0 40px;
+        }
+        header {
+            display: block;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            padding: 28px 28px 28px 80px;
+            text-align: left;
+        }
+        .colored-background {
+            background-color: #bf4040;
+            color: #fff;
+        }
+        header, .footer, .divider, h2 {
+            background-color: #bf4040;
+            color: #fff;
+        }
+        header a, .footer a, .divider a, h2 a {
+            color: #f2d9d9;
+        }
+        .footer a, .divider a {
+            text-decoration: underline;
+        }
+        .comments, .divider-disqus {
+            background-color: #e4e4e0;
+        }
+        .comments {
+            padding-bottom: 20px;
+            text-shadow: 1px 1px 3px #fff;
+        }
+        h2 {
+            font-size: 20px;
+            margin: 20px 0;
+            max-width: 530px;
+            padding: 10px 40px;
+        }
+        .width600 h2 {
+            max-width: 680px;
+        }
+        h2 a.anchor {
+            color: #bf4040;
+            float: right;
+            text-align: right;
+            width: 2em;
+        }
+        h2:hover a.anchor {
+            color: #df9f9f;
+        }
+        h3 {
+            font-size: 18px;
+            margin: 18px 0;
+        }
+        nav {
+            display: block;
+        }
+        nav ul {
+            line-height: 1;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline-block;
+            padding: 2px 5px;
+            text-align: center;
+            white-space: nowrap;
+            width: 10%;
+        }
+        nav ul li a {
+            display: block;
+            font-weight: bold;
+            text-decoration: none;
+            width: 100%;
+        }
+        nav ul li.nav:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+        nav ul li.navself {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+        .topic {
+            margin-bottom: 35px;
+            margin-left: 40px;
+            margin-right: 40px;
+            max-width: 450px;
+        }
+        .width600 .topic {
+            max-width: 600px;
+        }
+        header, .divider, h2 {
+            border-bottom: 1px solid #000;
+        }
+        .divider, .footer, h2 {
+            border-top: 1px solid #000;
+        }
+        .divider {
+            min-height: 28px;
+            padding-left: 2.5em;
+        }
+        .divider-disqus {
+            padding-top: 14px;
+            text-align: center;
+        }
+        .footer {
+            border-top: 1px solid #000;
+            clear: both;
+            padding: 7px 14px;
+        }
+        .footer p {
+            line-height: 1.1;
+            max-width: 40em;
+        }
+        h2:target {
+            animation: 0.4s ease 0s normal none 1 running target-attention;
+        }
+        @keyframes target-attention {
+            0% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        h2:target {
+            font-size: 24px;
+        }
+        div:target {
+            border: 1px dashed #888;
+        }
+        kbd kbd {
+            background: #ddd none repeat scroll 0 0;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            box-shadow: 0 0 1px 1px #fff inset, 0 2px 0 rgba(0, 0, 0, 0.3);
+            color: #242;
+            display: inline-block;
+            font-family: "Helvetica Neue","Helvetica","Tahoma","Arial",sans-serif;
+            font-size: 11px;
+            margin: 0 1px 3px;
+            padding: 1px 7px;
+            white-space: nowrap;
+        }
+        samp, kbd {
+            background-color: #f4f4f0;
+        }
+        code, samp {
+            color: #442;
+        }
+        kbd {
+            color: #252;
+            margin: 0 7px;
+        }
+        .topic > img {
+            max-width: 100%;
+        }
+        .topic figcaption {
+            font-size: 12px;
+            text-align: center;
+        }
+        a {
+            color: #bf4040;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .topic p, .topic li {
+            hyphens: auto;
+            text-align: justify;
+        }
+        nav, figure, abbr, acronym, code, kbd, samp, tt, var, pre {
+            hyphens: none;
+        }
+        p, ul, ol, ul.spaced > li, ol.spaced > li {
+            margin: 1.25em 0;
+        }
+        ul ul, ul ol, ol ul, ol ol, li ul, li ol {
+            margin: 0;
+        }
+        ul, ol {
+            margin-left: 0;
+            padding-left: 21px;
+        }
+        dt {
+            font-weight: bold;
+        }
+        pre {
+            border-bottom: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            border-width: 1px 0;
+            font-size: 12px;
+            line-height: 1.4;
+            max-width: 450px;
+            overflow: auto;
+            padding: 4px 12px;
+            white-space: pre-wrap;
+        }
+        .width600 pre {
+            max-width: 600px;
+        }
+        .width600 pre {
+            font-size: 14px;
+        }
+        ul pre, ol pre {
+            width: 450px;
+        }
+        pre.simple, .comments pre {
+            background: transparent none repeat scroll 0 0;
+            border: medium none;
+            box-shadow: none;
+            overflow: visible;
+            width: 100%;
+        }
+        pre.snippet, pre.src {
+            border-bottom-style: dashed;
+            border-top-style: dashed;
+        }
+        .topic > pre:only-child {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+            padding-bottom: 14px;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table.standard {
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            border-collapse: collapse;
+        }
+        table.standard th {
+            background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #f8f8f8, #f8f8f8, #f0f0f0) repeat scroll 0 0;
+        }
+        table.standard td {
+            background-color: #fff;
+        }
+        table.standard th, table.standard td {
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+        p.note, div.note > p {
+            background: #eee none repeat scroll 0 0;
+            border: 1px solid #ddd;
+            box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.4);
+            margin: 1em;
+            padding: 1em;
+        }
+        svg {
+            overflow: hidden;
+        }
+        tt, code {
+            padding: 0 2px;
+        }
+        address {
+            max-width: 450px;
+            text-align: right;
+        }
+        .footer address {
+            text-align: left;
+        }
+        @media only screen and (max-width: 700px) {
+            .main {
+                padding: 0 10px;
+            }
+            .topic {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            h2 {
+                max-width: 400px;
+            }
+            pre {
+                font-size: 10px;
+            }
+            .width600 pre {
+                font-size: 11px;
+            }
+            nav {
+                font-size: 12px;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            header, .footer {
+                font-size: 12px;
+            }
+            h1 {
+                font-size: 14px;
+                padding: 14px;
+                text-align: center;
+            }
+            nav span.longnav, nav form {
+                display: none;
+            }
+            nav ul li {
+                width: 15%;
+            }
+            .omit-if-narrow, nav ul li.omit-if-narrow {
+                display: none;
+            }
+            pre {
+                font-size: 9px;
+                width: auto;
+            }
+            nav {
+                font-size: 10px;
+            }
+        }
+        form {
+            margin: 0;
+        }
+        input[type="text"] {
+            background-color: #f8f8f4;
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            color: #000;
+            font-weight: bold;
+            max-width: 100%;
+            text-align: center;
+        }
+        input[type="text"]:focus {
+            background-color: #fffff4;
+        }
+        input::-moz-placeholder {
+            color: #aaa;
+        }
+        .TODO {
+            background: #e8e3e3 none repeat scroll 0 0;
+            border: 1px solid #bf4040;
+            color: #bf4040;
+            margin-left: 0.5ex;
+        }
+        .DONE {
+            background: #e3e3e8 none repeat scroll 0 0;
+            border: 1px solid #4040bf;
+            color: #4040bf;
+        }
+        pre.src .comment-delimiter, pre.src .nxml-comment-delimiter {
+            color: #4488ff;
+        }
+        pre.src .comment, pre.src .nxml-comment-content {
+            color: #006699;
+        }
+        pre.src .keyword {
+            color: #406abf;
+            font-weight: bold;
+        }
+        pre.src .builtin {
+            color: #508b20;
+        }
+        pre.src .warning {
+            color: #cc0000;
+        }
+        pre.src .function-name {
+            color: #268bd2;
+            font-weight: bold;
+        }
+        pre.src .variable-name {
+            color: #00008b;
+        }
+        pre.src .type {
+            color: #6c71c4;
+        }
+        pre.src .constant-face {
+            color: #d33682;
+        }
+        pre.src .doc {
+            background-color: #e2e6e8;
+            color: #666666;
+        }
+        pre.src .string {
+            color: #888888;
+        }
+        pre.src .preprocessor {
+            color: #859900;
+        }
+        pre.src .negation-char, pre.src .sh-escaped-newline {
+            color: #ff0000;
+        }
+        pre.src .todo {
+            background: #dc322f none repeat scroll 0 0;
+            color: #ffffff;
+        }
+        pre.src .note {
+            background: #2aa198 none repeat scroll 0 0;
+            color: #ffffff;
+        }
+        pre.src .hack {
+            background: #859900 none repeat scroll 0 0;
+            color: #ffffff;
+        }
+        pre.src .paren {
+            color: #a0a090;
+            font-weight: bold;
+        }
+        pre.src .minor-control-construct {
+            color: #268bd2;
+        }
+        pre.src .major-control-construct {
+            color: #bf4040;
+        }
+        pre.src-emacs-lisp .paren {
+            color: #c9c9c4;
+        }
+        pre.src-sh .string, pre.src-sh .comment {
+            color: inherit;
+        }
+        pre.src-python .highlight-indentation {
+            border-right: 2px solid #eeeeee;
+        }
+        pre.src-xml .nxml-element-local-name {
+            color: #406abf;
+            font-weight: normal;
+        }
+        pre.src-xml .nxml-tag-delimiter, pre.src-xml .nxml-tag-slash {
+            color: #9cabc9;
+            font-weight: bold;
+        }
+        table.standard td.left, table.standard th.left {
+            text-align: left;
+        }
+        table.standard td.center, table.standard th.center {
+            text-align: center;
+        }
+        table.standard td.right, table.standard th.right {
+            text-align: right;
+        }
+        [class^="section-number"] {
+            color: #966;
+        }
+        h2 [class^="section-number"] {
+            color: #e6b3b3;
+            display: inline-block;
+            margin-left: -40px;
+            text-align: right;
+            width: 40px;
+        }
+        h3 [class^="section-number"] {
+            background-color: #bf4040;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            color: #e6b3b3;
+            display: inline-block;
+            margin-left: -40px;
+            padding: 4px 0;
+            text-align: center;
+            text-rendering: optimizelegibility;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+            width: 40px;
+        }
+        @media only screen and (max-width: 700px) {
+            h3 [class^="section-number"] {
+                margin-left: -10px;
+            }
+        }
+        #table-of-contents {
+            background-color: #fff;
+            float: right;
+            margin-left: 40px;
+            padding-left: 40px;
+            width: 300px;
+        }
+        #table-of-contents::after {
+            clear: both;
+        }
+        #table-of-contents h2 {
+            background-color: transparent;
+            background-image: none;
+            border-bottom: medium none;
+            border-top: medium none;
+            color: #000;
+            padding: 0;
+            text-shadow: none;
+        }
+        @media print {
+            body {
+                font-family: "Book Antiqua","Times New Roman",serif;
+                font-size: 12pt;
+                line-height: 1.25;
+            }
+            h1, h2, h3, h4, h5, h6, .footer, .divider-disqus {
+                font-family: "Helvetica",sans-serif;
+                font-size: 12pt;
+                text-rendering: optimizelegibility;
+            }
+            h1 {
+                font-size: 18pt;
+            }
+            h1 .subheading {
+                font-size: 12pt;
+            }
+            header, h2 {
+                text-shadow: none;
+            }
+            tt, code, kbd, samp, pre {
+                font-family: "Courier","Courier New",monospace;
+                font-size: 12pt;
+            }
+            nav, .comments {
+                display: none;
+            }
+        }
+        header, .footer, .divider, h2 {
+            background-image: url("/img/transparent-blob.png"), url("/img/transparent-blob.png");
+            background-position: 0 0px, 16px 16px;
+        }
+        header, .footer, .divider, h2 {
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDU2IDEwMCI+CjxyZWN0IHdpZHRoPSI1NiIgaGVpZ2h0PSIxMDAiIGZpbGw9ImhzbCgwLDUwJSw1MCUpIj48L3JlY3Q+CjxwYXRoIGQ9Ik0yOCA2NkwwIDUwTDAgMTZMMjggMEw1NiAxNkw1NiA1MEwyOCA2NkwyOCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iaHNsKDAsNTAlLDQwJSkiIHN0cm9rZS13aWR0aD0iMiI+PC9wYXRoPgo8cGF0aCBkPSJNMjggMEwyOCAzNEwwIDUwTDAgODRMMjggMTAwTDU2IDg0TDU2IDUwTDI4IDM0IiBmaWxsPSJub25lIiBzdHJva2U9ImhzbCgwLDUwJSw0NSUpIiBzdHJva2Utd2lkdGg9IjEuNSI+PC9wYXRoPgo8L3N2Zz4=");
+        }
+        @media only screen and (min-width: 1375px) {
+            .main {
+                max-width: 1375px;
+            }
+            .width600 div.topic {
+                max-width: 1375px;
+            }
+            .width600 div.topic > * {
+                max-width: 600px;
+            }
+            div.topic > .float-container {
+                max-width: inherit;
+            }
+            #toc {
+                float: right;
+                margin-left: 100px;
+                width: 300px;
+            }
+        }
+        .h2banner, h2, h3, .float-container {
+            clear: both;
+        }
+        .float-container > * {
+            clear: left;
+            float: left;
+            width: 600px;
+        }
+        .float-container > .float-right {
+            clear: right;
+            float: right;
+        }
+        .float-container > p:first-child, .float-container > div:first-child > p:first-child {
+            margin-top: 0;
+        }
+        #toc {
+            -moz-columns: auto 180px;
+            list-style: inside url("hexagon-bullet.svg") square;
+        }
+        pre {
+            background: hsl(60, 10%, 95%) none repeat scroll 0 0;
+            border-color: hsla(0, 0%, 70%, 0.5);
+            box-shadow: none;
+        }
+        button {
+            background: hsl(0, 24%, 95%) none repeat scroll 0 0;
+            border: 1px outset hsl(0, 24%, 95%);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: bold;
+            margin: 4px;
+            padding: 2px;
+        }
+        button.highlight {
+            background: hsl(0, 24%, 80%) none repeat scroll 0 0;
+            border-color: hsl(0, 24%, 80%);
+            box-shadow: 1px 1px 3px hsla(0, 0%, 0%, 0.2);
+        }
+        button:hover {
+            background: hsl(0, 48%, 46%) none repeat scroll 0 0;
+            border-color: hsl(0, 48%, 46%);
+            box-shadow: 1px 1px 3px hsla(0, 0%, 0%, 0.5);
+            color: hsl(0, 0%, 100%);
+        }
+        .diagram {
+            text-align: center;
+            width: 600px;
+        }
+        svg {
+            -moz-user-select: none;
+            pointer-events: visiblepainted;
+        }
+        svg > * {
+            pointer-events: none;
+        }
+        .cube {
+            transform: translateX(0px);
+            transition: transform 2s ease-in-out 0s;
+        }
+        .cube path {
+            stroke: hsl(60, 10%, 80%);
+            stroke-width: 1px;
+        }
+        .cube.base path {
+            stroke: hsl(60, 10%, 85%);
+        }
+        .cube .full {
+            fill: hsl(60, 10%, 90%);
+            stroke: hsl(60, 10%, 70%);
+            stroke-width: 1px;
+        }
+        .cube.base .full {
+            stroke: hsl(60, 10%, 65%);
+        }
+        .cube .shade {
+            fill: hsl(60, 10%, 80%);
+            stroke: hsl(60, 10%, 70%);
+            stroke-width: 1px;
+        }
+        .cube.base .shade {
+            fill: hsl(60, 10%, 90%);
+            stroke: hsl(60, 10%, 65%);
+        }
+        .cube.offscreen {
+            transform: translateX(375px);
+        }
+        text {
+            font-size: 14px;
+            text-anchor: middle;
+        }
+        #neighbors-cube text, #neighbors-axial text {
+            font-size: 20px;
+        }
+        #grid-axial text {
+            font-size: 16px;
+        }
+        .tile polygon, #diagram-map-storage-array rect {
+            fill: hsl(60, 10%, 95%);
+            pointer-events: visiblepainted;
+            stroke: hsl(0, 0%, 70%);
+            stroke-width: 0.5;
+        }
+        .tile.q-axis-same polygon {
+            fill: hsl(90, 20%, 87%);
+        }
+        .tile.r-axis-same polygon {
+            fill: hsl(200, 15%, 90%);
+        }
+        .tile.s-axis-same polygon {
+            fill: hsl(300, 10%, 90%);
+        }
+        .tile.q-axis-same.r-axis-same polygon {
+            fill: hsl(160, 20%, 80%);
+        }
+        .tile.q-axis-same tspan.q {
+            fill: hsl(90, 100%, 35%);
+            font-weight: bold;
+        }
+        .tile.r-axis-same tspan.r {
+            fill: hsl(200, 100%, 45%);
+            font-weight: bold;
+        }
+        .tile.s-axis-same tspan.s {
+            fill: hsl(300, 80%, 50%);
+            font-weight: bold;
+        }
+        .x-axis, .q-axis {
+            color: hsl(90, 100%, 25%);
+            stroke: hsl(90, 100%, 35%);
+            stroke-width: 2px;
+        }
+        .y-axis {
+            color: hsl(300, 80%, 40%);
+            stroke: hsl(300, 80%, 50%);
+            stroke-width: 2px;
+        }
+        .z-axis, .r-axis {
+            color: hsl(200, 100%, 35%);
+            stroke: hsl(200, 100%, 45%);
+            stroke-width: 2px;
+        }
+        #grid-comparison .x-axis, #grid-comparison .q-axis {
+            fill: hsl(90, 50%, 35%);
+        }
+        #grid-comparison .y-axis {
+            fill: hsl(300, 40%, 50%);
+        }
+        #grid-comparison .z-axis, #grid-comparison .r-axis {
+            fill: hsl(200, 50%, 45%);
+        }
+        #grid-comparison path {
+            fill-opacity: 0.5;
+            stroke-opacity: 0.5;
+        }
+        #grid-comparison text {
+            font-size: 20px;
+        }
+        #diagram-hex-to-pixel path {
+            fill: hsl(200, 50%, 70%);
+            fill-opacity: 0.5;
+            stroke: hsl(200, 50%, 30%);
+            stroke-opacity: 0.3;
+            stroke-width: 1;
+        }
+        #diagram-pixel-to-hex .highlight polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #diagram-line .selected polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        .neighbors-code span.highlight {
+            background: hsl(200, 50%, 80%) none repeat scroll 0 0;
+        }
+        .neighbors .highlight polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #neighbors-diagonal .highlight polygon {
+            fill: hsl(200, 20%, 90%);
+        }
+        #diagram-rotation .right2 polygon {
+            fill: hsl(300, 20%, 80%);
+        }
+        #diagram-rotation .left2 polygon {
+            fill: hsl(120, 20%, 80%);
+        }
+        #diagram-rotation .right1 polygon {
+            fill: hsl(300, 40%, 80%);
+        }
+        #diagram-rotation .left1 polygon {
+            fill: hsl(120, 40%, 80%);
+        }
+        #diagram-rotation .opposite polygon {
+            fill: hsl(200, 20%, 80%);
+        }
+        #diagram-rotation .center polygon {
+            fill: hsl(0, 0%, 60%);
+        }
+        #diagram-rotation .target polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #diagram-rotation .arrow {
+            fill-opacity: 0.5;
+            stroke-opacity: 0.3;
+            stroke-width: 1;
+        }
+        #diagram-rotation .arrow.right {
+            fill: hsl(300, 50%, 70%);
+            stroke: hsl(300, 50%, 30%);
+        }
+        #diagram-rotation .arrow.left {
+            fill: hsl(120, 50%, 70%);
+            stroke: hsl(120, 50%, 30%);
+        }
+        #diagram-rotation .arrow.target {
+            fill: hsl(200, 50%, 70%);
+            stroke: hsl(200, 50%, 30%);
+        }
+        #diagram-rotation text {
+            fill: hsl(0, 0%, 80%);
+        }
+        #diagram-rotation .left1 text, #diagram-rotation .left2 text, #diagram-rotation .right1 text, #diagram-rotation .right2 text, #diagram-rotation .opposite text, #diagram-rotation .target text, #diagram-rotation .center text {
+            fill: hsl(0, 0%, 0%);
+        }
+        #diagram-rings .arrow, #diagram-spiral .arrow {
+            fill: hsl(200, 50%, 50%);
+            fill-opacity: 0.5;
+            stroke: hsl(200, 50%, 30%);
+            stroke-opacity: 0.3;
+            stroke-width: 1;
+        }
+        #diagram-rings .arrow-first {
+            fill: hsl(200, 0%, 50%);
+            stroke: hsl(200, 0%, 50%);
+        }
+        #diagram-rings .ring polygon, #diagram-spiral .ring polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #diagram-hex-range .region polygon {
+            fill: hsl(200, 40%, 80%);
+        }
+        #diagram-hex-range line {
+        }
+        #diagram-distances text {
+            fill: hsl(0, 0%, 80%);
+        }
+        #diagram-distances tspan.highlight {
+            font-weight: bold;
+        }
+        #diagram-distances tspan.q.highlight {
+            fill: hsl(90, 100%, 35%);
+        }
+        #diagram-distances tspan.r.highlight {
+            fill: hsl(200, 100%, 45%);
+        }
+        #diagram-distances tspan.s.highlight {
+            fill: hsl(300, 80%, 50%);
+        }
+        #diagram-distances .highlight tspan.highlight {
+            fill: black;
+        }
+        #diagram-distances path.path {
+            fill: none;
+            stroke: hsl(60, 20%, 70%);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-opacity: 0.3;
+            stroke-width: 24px;
+        }
+        #diagram-intersection .regionA polygon {
+            fill: hsl(200, 40%, 80%);
+        }
+        #diagram-intersection .regionB polygon {
+            fill: hsl(300, 20%, 80%);
+        }
+        #diagram-intersection .regionC polygon {
+            fill: hsl(150, 20%, 80%);
+        }
+        #diagram-intersection .center polygon {
+            fill: hsl(200, 50%, 70%);
+        }
+        #diagram-field-of-view .shadow polygon {
+            fill: hsl(60, 10%, 90%);
+        }
+        #diagram-field-of-view .goal polygon {
+            fill: hsl(200, 50%, 70%);
+        }
+        #diagram-field-of-view .goal.shadow polygon {
+            fill: hsl(200, 30%, 70%);
+        }
+        #diagram-field-of-view .start polygon {
+            fill: hsl(60, 100%, 50%);
+        }
+        #diagram-field-of-view .blocked polygon {
+            fill: hsl(0, 20%, 70%);
+        }
+        #diagram-field-of-view .blocked.goal polygon {
+            fill: hsl(0, 20%, 70%);
+        }
+        #diagram-movement-range .shadow polygon {
+            fill: hsl(60, 10%, 90%);
+        }
+        #diagram-movement-range .goal polygon {
+            fill: hsl(200, 50%, 70%);
+        }
+        #diagram-movement-range .goal.shadow polygon {
+            fill: hsl(200, 30%, 70%);
+        }
+        #diagram-movement-range .start polygon {
+            fill: hsl(60, 100%, 50%);
+        }
+        #diagram-movement-range .blocked polygon {
+            fill: hsl(0, 20%, 70%);
+        }
+        #diagram-movement-range .shadow text {
+            fill: hsl(60, 10%, 70%);
+        }
+        #diagram-movement-range path.path {
+            fill: none;
+            stroke: hsl(60, 20%, 70%);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-opacity: 0.3;
+            stroke-width: 20px;
+        }
+        #diagram-pathfinding .path polygon {
+            fill: hsl(200, 10%, 90%);
+        }
+        #diagram-pathfinding .goal polygon {
+            fill: hsl(200, 50%, 70%);
+        }
+        #diagram-pathfinding .start polygon {
+            fill: hsl(60, 100%, 50%);
+        }
+        #diagram-pathfinding .blocked polygon {
+            fill: hsl(0, 20%, 70%);
+        }
+        #diagram-pathfinding path.path {
+            fill: none;
+            stroke: hsl(60, 20%, 50%);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-opacity: 0.5;
+            stroke-width: 4px;
+        }
+        #diagram-map-storage-array .samerow rect, #diagram-map-storage-shape .samerow polygon {
+            fill: hsl(200, 20%, 90%);
+        }
+        #diagram-map-storage-array .highlight rect, #diagram-map-storage-shape .highlight polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #diagram-map-storage-array .unused rect {
+            fill: hsl(0, 0%, 80%);
+        }
+        #diagram-wraparound .wrapped polygon {
+            fill: hsl(300, 5%, 80%);
+        }
+        #diagram-wraparound .wrapped.parity polygon {
+            fill: hsl(120, 5%, 85%);
+        }
+        #diagram-wraparound .wrapped.center polygon {
+            fill: hsl(200, 10%, 70%);
+        }
+        #diagram-wraparound .highlight polygon {
+            fill: hsl(200, 50%, 80%);
+        }
+        #diagram-wraparound .wrapped.highlight polygon {
+            fill: hsl(200, 40%, 90%);
+        }
+        circle.marker {
+            fill: #a44;
+        }
+        line.marker, path.marker {
+            stroke: #a44;
+            stroke-width: 3px;
+        }
+        .grid-vertical path, .grid-horizontal path {
+            fill: none;
+            stroke: hsl(0, 0%, 75%);
+            stroke-dasharray: 4, 3;
+            stroke-width: 1px;
+        }
+
+    </style>
+</head>
+<body>
+<!-- svg width="340px" height="340px" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <image xlink:href="firefox.png" x="0" y="0" height="340px" width="340px"/>
+</svg -->
+
+<svg height="225" width="280" id="grid-offset-odd-r">
+    <g transform="translate(27.416697508022978,22.5)">
+        <g class="tile r-axis-same" transform="translate(0,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30 )"/>
+
+        </g>
+        <g class="tile" transform="translate(17.32050807568877,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(0,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(17.320508075688778,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(0,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(17.320508075688767,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(0,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">0</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same r-axis-same" transform="translate(34.64101615137754,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(51.96152422706632,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(34.64101615137754,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(51.96152422706632,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(34.64101615137754,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(51.96152422706631,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile q-axis-same" transform="translate(34.641016151377556,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">1</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile r-axis-same" transform="translate(69.28203230275508,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(86.60254037844385,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(69.28203230275508,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(86.60254037844385,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(69.28203230275508,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(86.60254037844385,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(69.2820323027551,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">2</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile r-axis-same" transform="translate(103.92304845413264,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(121.2435565298214,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(103.92304845413264,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(121.2435565298214,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(103.92304845413264,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(121.24355652982139,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(103.92304845413264,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">3</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile r-axis-same" transform="translate(138.56406460551017,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(155.88457268119893,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(138.56406460551017,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(155.88457268119896,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(138.56406460551017,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(155.88457268119893,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(138.56406460551017,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">4</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile r-axis-same" transform="translate(173.2050807568877,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(190.5255888325765,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(173.2050807568877,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(190.5255888325765,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(173.2050807568877,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(190.5255888325765,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(173.2050807568877,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">5</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+        <g class="tile r-axis-same" transform="translate(207.84609690826528,0)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">0</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(225.16660498395407,30)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">1</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(207.84609690826525,60)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">2</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(225.16660498395402,90)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">3</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(207.84609690826528,120)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">4</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(225.16660498395402,150)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">5</tspan>
+            </text>
+        </g>
+        <g class="tile" transform="translate(207.84609690826528,180)">
+            <polygon points="20.000,0.000 10.000,17.321 -10.000,17.321 -20.000,0.000 -10.000,-17.321 10.000,-17.321"
+                     transform="rotate(-30)"/>
+            <text y="0.4em">
+                <tspan class="q">6</tspan>
+                <tspan>,</tspan>
+                <tspan class="r">6</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
+</body>
+</html>

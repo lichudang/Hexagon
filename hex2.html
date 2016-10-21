@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hex</title>
+    <script type="text/javascript">
+        function makeSvgElement(tag, attrs) {
+            var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            for (var k in attrs) {
+                el.setAttribute(k, attrs[k]);
+            }
+            return el;
+        }
+
+        function drawHexagon(svgElement, x, y, r, options) {
+            var sin60r = 0.866 * r;
+            var halfr = r >> 1;
+
+            var x1 = x + r;
+            var y1 = y;
+            var x2 = x + halfr;
+            var y2 = y - sin60r;
+            var x3 = x - halfr;
+            var y3 = y - sin60r;
+            var x4 = x - r;
+            var y4 = y;
+            var x5 = x - halfr;
+            var y5 = y + sin60r;
+            var x6 = x + halfr;
+            var y6 = y + sin60r;
+            var points = x1 + "," + y1 + " "
+                    + x2 + "," + y2 + " "
+                    + x3 + "," + y3 + " "
+                    + x4 + "," + y4 + " "
+                    + x5 + "," + y5 + " "
+                    + x6 + "," + y6;
+
+
+            var g = makeSvgElement("g");
+            var p = makeSvgElement('polygon', {
+                points: points,
+                transform: 'rotate(-30)'
+            });
+            g.appendChild(p);
+            svgElement.appendChild(g);
+        }
+
+
+    </script>
+</head>
+<body onload="javascript:drawHexagon(document.getElementById('svgPanel'), 200, 300, 80)">
+
+<svg id="svgPanel" width="600" height="400" >
+
+
+
+</svg>
+
+</body>
+</html>
