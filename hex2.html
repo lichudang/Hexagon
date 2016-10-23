@@ -12,7 +12,7 @@
             return el;
         }
 
-        function drawHexagon(svgElement, x, y, r, options) {
+        /*function drawHexagon(svgElement, x, y, r, options) {
             var sin60r = 0.866 * r;
             var halfr = r >> 1;
 
@@ -28,6 +28,7 @@
             var y5 = y + sin60r;
             var x6 = x + halfr;
             var y6 = y + sin60r;
+
             var points = x1 + "," + y1 + " "
                     + x2 + "," + y2 + " "
                     + x3 + "," + y3 + " "
@@ -35,20 +36,85 @@
                     + x5 + "," + y5 + " "
                     + x6 + "," + y6;
 
+            var polygonAttrs = {
+                points: points,
+                //transform: 'rotate(-30)'
+            };
+
+            if (options && options.default) {
+                for (var k in options.default) {
+                    polygonAttrs[k] = options.default[k];
+                }
+            }
 
             var g = makeSvgElement("g");
-            var p = makeSvgElement('polygon', {
-                points: points,
-                transform: 'rotate(-30)'
-            });
+            var p = makeSvgElement('polygon', polygonAttrs);
+            g.appendChild(p);
+            svgElement.appendChild(g);
+        }*/
+
+        function drawHexagon(svgElement, x, y, r, options) {
+            var sin60r = 0.866 * r;
+            var halfr = r >> 1;
+
+            var x1 = x;
+            var y1 = y - r;
+            var x2 = x + sin60r;
+            var y2 = y - halfr;
+            var x3 = x + sin60r;
+            var y3 = y + halfr;
+            var x4 = x;
+            var y4 = y + r;
+            var x5 = x - sin60r;
+            var y5 = y + halfr;
+            var x6 = x - sin60r;
+            var y6 = y - halfr;
+
+            var points = x1 + "," + y1 + " "
+                    + x2 + "," + y2 + " "
+                    + x3 + "," + y3 + " "
+                    + x4 + "," + y4 + " "
+                    + x5 + "," + y5 + " "
+                    + x6 + "," + y6;
+
+            var polygonAttrs = {
+                points: points
+            };
+
+            if (options && options.default) {
+                for (var k in options.default) {
+                    polygonAttrs[k] = options.default[k];
+                }
+            }
+
+            var g = makeSvgElement("g");
+            var p = makeSvgElement('polygon', polygonAttrs);
             g.appendChild(p);
             svgElement.appendChild(g);
         }
 
 
+
+        function init() {
+            drawHexagon(document.getElementById('svgPanel'), 200, 300, 80, {
+                default: {
+                    stroke: "red",
+                    fill: "transparent"
+                }
+            });
+
+            drawHexagon(document.getElementById('svgPanel'), 200+(0.866*80*2), 300, 80, {
+                default: {
+                    stroke: "green",
+                    fill: "transparent"
+                }
+            });
+        }
+
+
     </script>
 </head>
-<body onload="javascript:drawHexagon(document.getElementById('svgPanel'), 200, 300, 80)">
+<body onload="javascript:init();">
 
 <svg id="svgPanel" width="600" height="400" >
 
