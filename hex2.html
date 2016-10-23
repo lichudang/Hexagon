@@ -93,22 +93,37 @@
             svgElement.appendChild(g);
         }
 
+        function drawHexagonNet(svgElement, x0, y0, r, nX, nY, options) {
+            var r2 = r << 1;
+            var halfr = r >> 1;
+            var sin60r = 0.866 * r;
 
+            var shiftRight = 0;
+            for (var j=0; j<nY; j++) {
+                var y = y0 + ((r+halfr) * j);
+                if (j % 2 == 0) {
+                    shiftRight = 0;
+                }
+                else {
+                    shiftRight = sin60r;
+                }
+
+                for (var i=0; i<nX; i++) {
+                    var x = x0 + ((0.866*r2) * i);
+                    drawHexagon(svgElement, x +  shiftRight, y, r, options);
+                }
+            }
+        }
 
         function init() {
-            drawHexagon(document.getElementById('svgPanel'), 200, 300, 80, {
+            var defaultOptions = {
                 default: {
-                    stroke: "red",
-                    fill: "transparent"
+                    stroke: "brown",
+                    fill: "gold"
                 }
-            });
+            };
 
-            drawHexagon(document.getElementById('svgPanel'), 200+(0.866*80*2), 300, 80, {
-                default: {
-                    stroke: "green",
-                    fill: "transparent"
-                }
-            });
+            drawHexagonNet(document.getElementById('svgPanel'), 0, 20, 25, 80, 60, defaultOptions);
         }
 
 
@@ -116,7 +131,7 @@
 </head>
 <body onload="javascript:init();">
 
-<svg id="svgPanel" width="600" height="400" >
+<svg id="svgPanel" width="1600" height="1200" >
 
 
 
