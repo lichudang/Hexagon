@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Hex</title>
+    <style type="text/css">
+        .use1 {
+        }
+        .use1:hover {
+            fill: #ffffff;
+            fill-opacity: 0.5;
+        }
+        .base {
+        }
+    </style>
     <script type="text/javascript">
         function makeSvgElement(tag, attrs) {
             var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -81,19 +91,19 @@
                 points: points
             };
 
-            if (options && options.default) {
-                for (var k in options.default) {
-                    polygonAttrs[k] = options.default[k];
+            if (options) {
+                for (var k in options) {
+                    polygonAttrs[k] = options[k];
                 }
             }
 
-            var g = makeSvgElement("g");
+            var g = makeSvgElement("g", {class: "use1"});
             var p = makeSvgElement('polygon', polygonAttrs);
             g.appendChild(p);
             svgElement.appendChild(g);
         }
 
-        function drawHexagonNet(svgElement, x0, y0, r, nX, nY, options) {
+        function drawHexagonNet(svgElement, x0, y0, r, nX, nY, netOptions) {
             var r2 = r << 1;
             var halfr = r >> 1;
             var sin60r = 0.866 * r;
@@ -109,21 +119,85 @@
                 }
 
                 for (var i=0; i<nX; i++) {
+                    var options = {};
+                    for (var k in netOptions.default) {
+                        options[k] = netOptions.default[k];
+                    }
+                    if (netOptions["net-attrs"]) {
+                        if (netOptions["net-attrs"][j]) {
+                            if (netOptions["net-attrs"][j][i]) {
+                                for (var k in netOptions["net-attrs"][j][i]) {
+                                    options[k] = netOptions["net-attrs"][j][i][k];
+                                }
+                            }
+                        }
+                    }
+
                     var x = x0 + ((0.866*r2) * i);
                     drawHexagon(svgElement, x +  shiftRight, y, r, options);
                 }
             }
         }
 
-        function init() {
-            var defaultOptions = {
-                default: {
-                    stroke: "brown",
-                    fill: "gold"
+        function createNetAttrsFromFillPatternIds(patternIds) {
+            var netAttrs = [];
+            for (var j in patternIds) {
+                netAttrs[j] = [];
+                for (var i in patternIds[j]) {
+                    netAttrs[j][i] = {};
+                    netAttrs[j][i].fill = "url(#" + patternIds[j][i] + ")";
                 }
-            };
+            }
+            return netAttrs;
+        }
 
-            drawHexagonNet(document.getElementById('svgPanel'), 0, 20, 25, 80, 60, defaultOptions);
+        var fillPatternIds = [
+            ["ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1"],
+            ["dirt1", "dirt1", "water1", "dirt2", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt2", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1"],
+            ["dirt1", "dirt1", "water1", "dirt2", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt2", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "ice1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1"],
+            ["grass1", "grass1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "dirt1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "dirt1", "dirt1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "grass1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "water1", "water1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "grass1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["grass1", "grass1", "grass1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1", "grass1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"],
+            ["water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1", "water1"]
+        ];
+
+        var netAttrs = createNetAttrsFromFillPatternIds(fillPatternIds);
+
+        var netOptions = {
+            default: {
+                "stroke": "white",
+                "stroke-width": 2,
+                "stroke-linecap": "round"
+            },
+            "net-attrs": netAttrs
+        };
+
+        function init() {
+            drawHexagonNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
         }
 
 
@@ -131,8 +205,27 @@
 </head>
 <body onload="javascript:init();">
 
-<svg id="svgPanel" width="1600" height="1200" >
-
+<svg id="svgPanel" width="1400" height="1000" >
+    <defs>
+        <pattern id="dirt1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_dirt1.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+        <pattern id="dirt2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_dirt2.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+        <pattern id="grass1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_grass3.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+        <pattern id="grass2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_grass2.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+        <pattern id="water1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_water1.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+        <pattern id="ice1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+            <image xlink:href="tile_ice1.png" x="0" y="0" width="128" height="128" />
+        </pattern>
+    </defs>
 
 
 </svg>
