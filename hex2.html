@@ -36,8 +36,6 @@
             var y4 = y + r;
             var x5 = x - sin60r;
             var y5 = y + halfr;
-
-
             var x6 = x - sin60r;
             var y6 = y - halfr;
 
@@ -54,20 +52,18 @@
             var sin60r = 0.866 * r;
             var halfr = r >> 1;
 
-            var x1 = x;
-            var y1 = y - r;
-            var x2 = x + sin60r;
-            var y2 = y - halfr;
-            var x3 = x + sin60r;
-            var y3 = y + halfr;
-            var x4 = x;
-            var y4 = y + r;
-            var x5 = x - sin60r;
-            var y5 = y + halfr;
-
-
-            var x6 = x - sin60r;
-            var y6 = y - halfr;
+            var x1 = x - halfr;
+            var y1 = y - sin60r;
+            var x2 = x + halfr;
+            var y2 = y - sin60r;
+            var x3 = x + r;
+            var y3 = y;
+            var x4 = x + halfr;
+            var y4 = y + sin60r;
+            var x5 = x - halfr;
+            var y5 = y + sin60r;
+            var x6 = x - r;
+            var y6 = y;
 
             var points = x1 + "," + y1 + " "
                     + x2 + "," + y2 + " "
@@ -76,23 +72,6 @@
                     + x5 + "," + y5 + " "
                     + x6 + "," + y6;
             return points;
-        }
-
-        function drawPointyToppedHexagon(container, x, y, r, options) {
-            var polygonAttrs = {
-                points: createPointyToppedHexagonPoints(r, x, y)
-            };
-
-            if (options) {
-                for (var k in options) {
-                    polygonAttrs[k] = options[k];
-                }
-            }
-
-            var g = makeSvgElement("g", {class: "use1"});
-            var p = makeSvgElement('polygon', polygonAttrs);
-            g.appendChild(p);
-            container.appendChild(g);
         }
 
         function drawPolygon(container, points, options) {
@@ -112,9 +91,16 @@
             container.appendChild(g);
         }
 
+        function drawPointyToppedHexagon(container, x, y, r, options) {
+            drawPolygon(container, createPointyToppedHexagonPoints(r, x, y), options);
+        }
+
+        function drawFlatToppedHexagon(container, x, y, r, options) {
+            drawPolygon(container, createFlatToppedHexagonPoints(r, x, y), options);
+        }
 
 
-        function drawHexagonNet(svgElement, x0, y0, r, nX, nY, netOptions) {
+        function drawPointyToppedHexagonRectangleNet(container, x0, y0, r, nX, nY, netOptions) {
             var r2 = r << 1;
             var halfr = r >> 1;
             var sin60r = 0.866 * r;
@@ -145,8 +131,18 @@
                     }
 
                     var x = x0 + ((0.866*r2) * i);
-                    drawPointyToppedHexagon(svgElement, x +  shiftRight, y, r, options);
+                    drawPointyToppedHexagon(container, x +  shiftRight, y, r, options);
                 }
+            }
+        }
+
+        function drawPointyToppedHexagonHexNet(container, x, y, r, rNet, netOptions) {
+            var r2 = r << 1;
+            var halfr = r >> 1;
+            var sin60r = 0.866 * r;
+
+            for (var row = -rNet; row <= rNet; row++) {
+
             }
         }
 
@@ -215,7 +211,14 @@
         };
 
         function init() {
-            drawHexagonNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
+            drawPointyToppedHexagonRectangleNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
+            /*drawFlatToppedHexagon(document.getElementById('svgPanel'), 100, 100, 60, {
+                "stroke": "blue",
+                "stroke-width": 2,
+                "stroke-linecap": "round",
+                "fill": "url(#g1)",
+                "onclick":"cellClicked(evt)"
+            });*/
         }
 
         /*function drawPointyToppedHexagon(svgElement, x, y, r, options) {
