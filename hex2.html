@@ -22,9 +22,7 @@
             return el;
         }
 
-
-
-        function drawHexagon(svgElement, x, y, r, options) {
+        function createPointyToppedHexagonPoints(r, x, y) {
             var sin60r = 0.866 * r;
             var halfr = r >> 1;
 
@@ -38,6 +36,8 @@
             var y4 = y + r;
             var x5 = x - sin60r;
             var y5 = y + halfr;
+
+
             var x6 = x - sin60r;
             var y6 = y - halfr;
 
@@ -47,7 +47,55 @@
                     + x4 + "," + y4 + " "
                     + x5 + "," + y5 + " "
                     + x6 + "," + y6;
+            return points;
+        }
 
+        function createFlatToppedHexagonPoints(r, x, y) {
+            var sin60r = 0.866 * r;
+            var halfr = r >> 1;
+
+            var x1 = x;
+            var y1 = y - r;
+            var x2 = x + sin60r;
+            var y2 = y - halfr;
+            var x3 = x + sin60r;
+            var y3 = y + halfr;
+            var x4 = x;
+            var y4 = y + r;
+            var x5 = x - sin60r;
+            var y5 = y + halfr;
+
+
+            var x6 = x - sin60r;
+            var y6 = y - halfr;
+
+            var points = x1 + "," + y1 + " "
+                    + x2 + "," + y2 + " "
+                    + x3 + "," + y3 + " "
+                    + x4 + "," + y4 + " "
+                    + x5 + "," + y5 + " "
+                    + x6 + "," + y6;
+            return points;
+        }
+
+        function drawPointyToppedHexagon(container, x, y, r, options) {
+            var polygonAttrs = {
+                points: createPointyToppedHexagonPoints(r, x, y)
+            };
+
+            if (options) {
+                for (var k in options) {
+                    polygonAttrs[k] = options[k];
+                }
+            }
+
+            var g = makeSvgElement("g", {class: "use1"});
+            var p = makeSvgElement('polygon', polygonAttrs);
+            g.appendChild(p);
+            container.appendChild(g);
+        }
+
+        function drawPolygon(container, points, options) {
             var polygonAttrs = {
                 points: points
             };
@@ -61,8 +109,10 @@
             var g = makeSvgElement("g", {class: "use1"});
             var p = makeSvgElement('polygon', polygonAttrs);
             g.appendChild(p);
-            svgElement.appendChild(g);
+            container.appendChild(g);
         }
+
+
 
         function drawHexagonNet(svgElement, x0, y0, r, nX, nY, netOptions) {
             var r2 = r << 1;
@@ -95,7 +145,7 @@
                     }
 
                     var x = x0 + ((0.866*r2) * i);
-                    drawHexagon(svgElement, x +  shiftRight, y, r, options);
+                    drawPointyToppedHexagon(svgElement, x +  shiftRight, y, r, options);
                 }
             }
         }
@@ -168,7 +218,7 @@
             drawHexagonNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
         }
 
-        /*function drawHexagon(svgElement, x, y, r, options) {
+        /*function drawPointyToppedHexagon(svgElement, x, y, r, options) {
          var sin60r = 0.866 * r;
          var halfr = r >> 1;
 

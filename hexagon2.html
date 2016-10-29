@@ -1,0 +1,38 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function makeSvgElement(tag, attrs) {
+            var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            for (var k in attrs) {
+                el.setAttribute(k, attrs[k]);
+            }
+            return el;
+        }
+
+        function drawHexagon(x, y, r) {
+
+            var points = (x-100) + "," + (y-100) + " "
+                    + (x+100) + "," + (y-100) + " "
+                    + (x+100) + "," + (y+100) + " "
+                    + (x-100) + "," + (y+100);
+
+            var g = makeSvgElement("g", {});
+            var p = makeSvgElement('polygon', {
+                points: points,
+                stroke: "blue",
+                fill: "transparent"
+            });
+            g.appendChild(p);
+            document.getElementById('drawing_board').appendChild(g);
+        }
+    </script>
+</head>
+
+<body onload="javascript:drawHexagon(200, 200, 20);">
+<svg id="drawing_board" width="800" height="600">
+
+
+
+</svg>
+</body>
+</html>
