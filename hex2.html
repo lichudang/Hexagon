@@ -131,7 +131,7 @@
                     }
 
                     var x = x0 + ((0.866*r2) * i);
-                    drawPointyToppedHexagon(container, x +  shiftRight, y, r, options);
+                    drawPointyToppedHexagon(container, x + shiftRight, y, r, options);
                 }
             }
         }
@@ -140,9 +140,14 @@
             var r2 = r << 1;
             var halfr = r >> 1;
             var sin60r = 0.866 * r;
+            var threeHalfR = halfr * 3;
 
-            for (var row = -rNet; row <= rNet; row++) {
-
+            for (var col = -rNet; col <= rNet; col++) {
+                var rowStartIndex = (col <= 0) ? -rNet - col : -rNet;
+                var rowEndIndex = (col <= 0) ? rNet : rNet - col;
+                for (var row = rowStartIndex; row <= rowEndIndex; row++) {
+                    drawFlatToppedHexagon(x + (col * threeHalfR), y + (col * sin60r) + (row * 2 * sin60r));
+                }
             }
         }
 
@@ -211,7 +216,8 @@
         };
 
         function init() {
-            drawPointyToppedHexagonRectangleNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
+            drawPointyToppedHexagonHexNet(document.getElementById('svgPanel'), 200, 200, 20, 3);
+            //drawPointyToppedHexagonRectangleNet(document.getElementById('svgPanel'), 25, 25, 20, 40, 30, netOptions);
             /*drawFlatToppedHexagon(document.getElementById('svgPanel'), 100, 100, 60, {
                 "stroke": "blue",
                 "stroke-width": 2,
