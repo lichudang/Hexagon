@@ -13,6 +13,7 @@
         .base {
         }
     </style>
+    <script type="text/javascript" src="/lib/ext-all.js"></script>
     <script type="text/javascript">
         function makeSvgElement(tag, attrs) {
             var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -271,7 +272,12 @@
          }*/
 
         function saveMapPattern() {
-
+            Ext.Ajax.request({
+                url: '/saveMap.php',
+                success: function(response) {
+                    alert("good");
+                }
+            });
         }
     </script>
 </head>
