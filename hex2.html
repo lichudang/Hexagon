@@ -301,7 +301,9 @@
             var children = document.getElementById('svgPanel').children;
             for (var i = 0; i < children.length; i++) {
               var c = children[i];
-              console.log(c);
+              if (c.tagName == 'G') {
+                  console.log(c.children[0].attributes['fill']);
+              }
             }
         }
     </script>
