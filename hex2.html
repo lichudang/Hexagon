@@ -298,6 +298,11 @@
 
         function bigMap() {
             console.log(document.getElementById('svgPanel'));
+            var children = document.getElementById('svgPanel').children;
+            for (var i = 0; i < children.length; i++) {
+              var c = children[i];
+              console.log(c);
+            }
         }
     </script>
 </head>
