@@ -156,8 +156,7 @@
 
         function cellClicked(evt) {
             var hexgonObj = evt.target;
-            //hexgonObj.style.opacity= 0.3;
-            hexgonObj.setAttribute ("stroke", "red");
+            hexgonObj.setAttribute("fill", "url(#" + selectedPatternId + ")");
         }
 
         function createNetAttrsFromFillPatternIds(patternIds) {
@@ -210,7 +209,7 @@
 
         var netOptions = {
             default: {
-                "stroke": "white",
+                "stroke": "#000000",
                 "stroke-width": 1,
                 "stroke-linecap": "round",
                 "onclick":"cellClicked(evt)"
@@ -279,36 +278,76 @@
                 }
             });
         }
+
+        var selectedImageId = "";
+        var selectedPatternId = "";
+
+        function selectImage(evt) {
+            var image = evt.target;
+            //console.log(image.id);
+
+            if (selectedImageId) {
+                var lastImg = document.getElementById(selectedImageId);
+                lastImg.style = "width:100px; height:100px; border: 2px white solid;";
+            }
+
+            image.style = "width:100px; height:100px; border: 2px red solid;";
+            selectedImageId = image.id;
+            selectedPatternId = selectedImageId.substring(4);
+        }
     </script>
 </head>
-<body onload="javascript:init();">
+<body onload="javascript:init();" background-color="black">
 
-<div style="width:100%; border: 0px solid;">
-    <button onclick="saveMapPattern();">Save</button>
+<div id="viewport" style="width:1600px; height:800px; border: 1px solid;">
+    <div style="width:160px; height:800px; float: left; border: 0px solid; background-color: white; padding: 10px 10px 10px 10px; overflow:scroll;">
+        <button onclick="saveMapPattern();">Save</button>
+
+        <br/><br/>
+
+        <img id="img-d1" src="images/tile_dirt1.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-d2" src="images/tile_dirt2.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-g1" src="images/tile_grass3.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-g2" src="images/tile_grass2.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-w1" src="images/tile_water1.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-i1" src="images/tile_ice1.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-w2" src="images/tile_water1.png" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+
+        <img id="img-w3" src="images/river.jpg" onclick="return selectImage(event);" style="width:100px; height:100px; border: 2px white solid;"/>
+    </div>
+
+    <div style="width:1200px; height: 800px; float: left; border: 1px solid; background-color: black;">
+        <svg id="svgPanel" style="width:1200px; height:800px; border: 0px solid; background-color: black;">
+            <defs>
+                <pattern id="d1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_dirt1.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="d2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_dirt2.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="g1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_grass3.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="g2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_grass2.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="w1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_water1.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="i1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/tile_ice1.png" x="0" y="0" width="128" height="128" />
+                </pattern>
+            </defs>
+        </svg>
+    </div>
 </div>
 
-<svg id="svgPanel" style="width:100%; height:800px; border: 0px solid;">
-    <defs>
-        <pattern id="d1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_dirt1.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-        <pattern id="d2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_dirt2.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-        <pattern id="g1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_grass3.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-        <pattern id="g2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_grass2.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-        <pattern id="w1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_water1.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-        <pattern id="i1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-            <image xlink:href="images/tile_ice1.png" x="0" y="0" width="128" height="128" />
-        </pattern>
-    </defs>
-</svg>
 
 </body>
 </html>
