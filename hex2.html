@@ -295,13 +295,17 @@
             selectedImageId = image.id;
             selectedPatternId = selectedImageId.substring(4);
         }
+
+        function bigMap() {
+            console.log(document.getElementById('svgPanel'));
+        }
     </script>
 </head>
 <body onload="javascript:init();" background-color="black">
 
 <div id="viewport" style="width:1600px; height:800px; border: 1px solid;">
     <div style="width:160px; height:800px; float: left; border: 0px solid; background-color: white; padding: 10px 10px 10px 10px; overflow:scroll;">
-        <button onclick="saveMapPattern();">Save</button>
+        <button onclick="saveMapPattern();">Save!</button> <button onclick="bigMap();">Map</button>
 
         <br/><br/>
 
@@ -343,6 +347,9 @@
                 </pattern>
                 <pattern id="w2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
                     <image xlink:href="images/river.jpg" x="0" y="0" width="128" height="128" />
+                </pattern>
+                <pattern id="b1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
+                    <image xlink:href="images/bg_main.jpg" x="0" y="0" width="128" height="128" />
                 </pattern>
             </defs>
         </svg>
