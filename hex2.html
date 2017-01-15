@@ -298,12 +298,18 @@
 
         function bigMap() {
             console.log(document.getElementById('svgPanel'));
+            var num = document.getElementById('svgPanel').children.length;
+            console.log(num);
+
             var children = document.getElementById('svgPanel').children;
             for (var i = 0; i < children.length; i++) {
-              var c = children[i];
-              if (c.tagName == 'G') {
-                  console.log(c.children[0].attributes['fill']);
-              }
+                var c = children[i];
+                //console.log(c.tagName);
+                if (c.tagName.toUpperCase() == 'G') {
+                    //console.log(c.children[0].attributes['fill']);
+                    c.children[0].setAttribute('fill', 'url(#b1)');
+                    //console.log(c.children[0].attributes['fill']);
+                }
             }
         }
     </script>
@@ -355,8 +361,8 @@
                 <pattern id="w2" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
                     <image xlink:href="images/river.jpg" x="0" y="0" width="128" height="128" />
                 </pattern>
-                <pattern id="b1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="128" height="128">
-                    <image xlink:href="images/bg_main.jpg" x="0" y="0" width="128" height="128" />
+                <pattern id="b1" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse" width="1200" height="800">
+                    <image xlink:href="images/bg_main.jpg" x="0" y="0" width="4757" height="2840" />
                 </pattern>
             </defs>
         </svg>
